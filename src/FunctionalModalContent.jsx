@@ -14,9 +14,12 @@ const style = {
   p: 4
 };
 
-const FunctionalModalContent = () => {
+const FunctionalModalContent = React.forwardRef((_, ref) => {
   return (
-    <Box sx={style}>
+    // issue: MUI: The modal content node does not accept focus.
+    // fix: add tabIndex={-1}
+    // https://stackoverflow.com/questions/53951479/react-material-ui-modal-causing-an-error-with-the-tabindex
+    <Box sx={style} tabIndex={-1} ref={ref}>
       <Typography id="modal-modal-title" variant="h6" component="h2">
         Text in a modal
       </Typography>
@@ -25,6 +28,6 @@ const FunctionalModalContent = () => {
       </Typography>
     </Box>
   );
-};
+});
 
 export default FunctionalModalContent;
